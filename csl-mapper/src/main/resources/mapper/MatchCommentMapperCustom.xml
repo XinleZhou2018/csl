@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csl.mapper.MatchCommentMapperCustom">
+
+    <resultMap id="MatchComment" type="com.csl.pojo.vo.MatchCommentVO">
+        <id column="comment_id" property="commentId"/>
+        <result column="match_id" property="matchId"/>
+        <result column="user_id" property="userId"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="content" property="content"/>
+        <result column="comment_time" property="commentTime"/>
+        <result column="reply_count" property="replyCount"/>
+    </resultMap>
+
+    <select id="queryMatchComments" parameterType="Long" resultMap="MatchComment">
+        SELECT
+	        c.id as comment_id,
+	        c.match_id as match_id,
+	        c.user_id as user_id,
+	        u.nick_name as nick_name,
+	        u.avatar_url as avatar_url,
+	        c.content as content,
+	        c.comment_time as comment_time,
+	        count(cr.id) as reply_count
+        FROM
+            `comment` c
+        LEFT JOIN comment_reply cr ON c.id = cr.comment_id
+        LEFT JOIN csl_user u ON c.user_id = u.id
+        WHERE
+            match_id = #{matchId}
+        GROUP BY
+            c.id
+    </select>
+
+    <resultMap id="MatchCommentReply" type="com.csl.pojo.vo.MatchCommentReplyVO">
+        <id column="reply_id" property="replyId"/>
+        <result column="comment_id" property="commentId"/>
+        <result column="user_id" property="userId"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="content" property="content"/>
+        <result column="reply_time" property="replyTime"/>
+    </resultMap>
+
+    <select id="queryMatchCommentReplies" parameterType="Long" resultMap="MatchCommentReply">
+        SELECT
+	        cr.id as reply_id,
+	        cr.comment_id as comment_id,
+	        cr.user_id as user_id,
+            u.nick_name as nick_name,
+            u.avatar_url as avatar_url,
+            cr.content as content,
+            cr.reply_time as reply_time
+        FROM
+            comment_reply cr
+        LEFT JOIN csl_user u ON cr.user_id = u.id
+        WHERE
+            cr.comment_id = #{commentId}
+        ORDER BY
+            reply_time
+        DESC
+    </select>
+
+</mapper>

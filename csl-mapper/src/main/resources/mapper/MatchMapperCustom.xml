@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csl.mapper.MatchMapperCustom" >
+    <select id="queryMatches" resultType="com.csl.pojo.Match">
+        SELECT
+            id,
+            home,
+            guest,
+            match_date as matchDate,
+            match_type as matchType,
+            description,
+            score
+        FROM
+          `match`
+        ORDER BY
+          matchDate
+        DESC
+    </select>
+
+</mapper>
