@@ -1,4 +1,4 @@
-package com.csl.exception;
+package com.csl.objects;
 
 public class NotFoundException{
 

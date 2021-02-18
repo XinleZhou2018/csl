@@ -18,12 +18,6 @@
             <artifactId>csl-service</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>com.csl</groupId>
-            <artifactId>csl-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
 </project>

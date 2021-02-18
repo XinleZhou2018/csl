@@ -5,12 +5,10 @@ import com.csl.utils.ResultObject;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @RestController
@@ -36,5 +34,13 @@ public class MatchCommentController {
                                             @RequestParam(required = false) @NotNull(message = "pageSize不能为空") @Min(value = 1, message = "pageCount大于1") Integer pageSize){
         PageInfo pageInfo = matchCommentService.queryMatchCommentReplies(commentId, page, pageSize);
         return ResultObject.success(pageInfo);
+    }
+
+    @PostMapping("/comment")
+    public ResultObject comment(
+            @RequestParam(required = false) @NotNull(message = "matchId不能为空") Long matchId,
+            @RequestParam(required = false) @NotBlank(message = "content不能为空") String content){
+        System.out.println("进入了Controller");
+        return null;
     }
 }

@@ -1,6 +1,6 @@
 package com.csl.controller;
 
-import com.csl.exception.HttpException;
+import com.csl.objects.HttpException;
 import com.csl.pojo.Match;
 import com.csl.service.MatchService;
 import com.csl.utils.ResultObject;

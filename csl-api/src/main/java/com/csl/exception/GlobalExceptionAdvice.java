@@ -1,6 +1,7 @@
 package com.csl.exception;
 
 
+import com.csl.objects.HttpException;
 import com.csl.utils.ResultObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
