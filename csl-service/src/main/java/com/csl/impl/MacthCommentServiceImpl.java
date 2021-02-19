@@ -29,6 +29,7 @@ public class MacthCommentServiceImpl implements MatchCommentService {
         return pageInfo;
     }
 
+    @Override
     public PageInfo<MatchCommentReplyVO> queryMatchCommentReplies(Long commentId, Integer page, Integer pageSize){
         PageHelper.startPage(page, pageSize);
 
@@ -37,6 +38,7 @@ public class MacthCommentServiceImpl implements MatchCommentService {
         return pageInfo;
     }
 
+    @Override
     public void saveComment(Long matchId, String content){
 
         //获取用户id
@@ -50,6 +52,7 @@ public class MacthCommentServiceImpl implements MatchCommentService {
         matchCommentMapperCustom.saveComment(map);
     }
 
+    @Override
     public void saveCommentReply(Long commentId, String content){
         //获取用户id
         String userid = UserIdThreadLocal.get();
