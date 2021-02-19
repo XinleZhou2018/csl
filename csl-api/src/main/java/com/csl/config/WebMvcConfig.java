@@ -21,7 +21,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginCheckInterceptor())
                 .addPathPatterns("/matchComment/comment")
-                .addPathPatterns("/match/hello");
+                .addPathPatterns("/matchComment/replyComment");
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }

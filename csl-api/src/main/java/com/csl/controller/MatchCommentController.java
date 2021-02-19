@@ -40,7 +40,15 @@ public class MatchCommentController {
     public ResultObject comment(
             @RequestParam(required = false) @NotNull(message = "matchId不能为空") Long matchId,
             @RequestParam(required = false) @NotBlank(message = "content不能为空") String content){
-        System.out.println("进入了Controller");
-        return null;
+        matchCommentService.saveComment(matchId, content);
+        return ResultObject.success(null);
+    }
+
+    @PostMapping("/replyComment")
+    public ResultObject replyComment(
+            @RequestParam(required = false) @NotNull(message = "commentId不能为空") Long commentId,
+            @RequestParam(required = false) @NotBlank(message = "content不能为空") String content){
+        matchCommentService.saveCommentReply(commentId, content);
+        return ResultObject.success(null);
     }
 }

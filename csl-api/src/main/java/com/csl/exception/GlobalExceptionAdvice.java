@@ -3,6 +3,8 @@ package com.csl.exception;
 
 import com.csl.objects.HttpException;
 import com.csl.utils.ResultObject;
+import com.mysql.cj.jdbc.exceptions.MysqlDataTruncation;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,8 @@ public class GlobalExceptionAdvice {
     public ResultObject handleException(HttpServletRequest request, Exception e){
         //保存在日志中 TODO
         System.out.println(e);
-
+//        MysqlDataTruncation -> SQLException
+        //MyBatisSystemException 数据库处理异常
         //返回给前端
         String requestUrl = request.getRequestURI();
         String method = request.getMethod();

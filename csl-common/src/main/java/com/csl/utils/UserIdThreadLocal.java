@@ -15,6 +15,10 @@ public class UserIdThreadLocal {
         return USERIDLOCAL.get();
     }
 
+    public static void clear(){
+        USERIDLOCAL.remove();
+    }
+
     /**tomcat底层 每一个请求都是一个线程，如果每一个请求都启动一个线程，性能就会降低，
         1. 于是就有了线程池，而线程池中的线程并不是真正销毁或真正启动的。
         2. 也就是说这个请求的线程是个可复用的线程，第二次请求可能还会拿到刚刚的线程，

@@ -62,4 +62,36 @@
         DESC
     </select>
 
+    <select id="saveComment" parameterType="Map">
+        INSERT INTO
+            `comment` (
+                match_id,
+                content,
+                user_id,
+                comment_time
+            )
+            values (
+                #{paramsMap.matchId},
+                #{paramsMap.content},
+                #{paramsMap.userId},
+                now()
+            )
+    </select>
+
+    <select id="saveCommentReply" parameterType="Map">
+        INSERT INTO
+            comment_reply (
+                comment_id,
+                user_id,
+                content,
+                reply_time
+            )
+            values (
+                #{paramsMap.commentId},
+                #{paramsMap.userId},
+                #{paramsMap.content},
+                now()
+            )
+    </select>
+
 </mapper>

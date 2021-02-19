@@ -62,7 +62,6 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
     //请求访问Controller之后，渲染视图之前
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
     }
 
     //请求访问Controller之后，渲染视图之后
@@ -76,7 +75,8 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
          UserThreadLocal.set(null); //清空本地线程中的user对象数据
          */
 
-        UserIdThreadLocal.set(null);
+//        UserIdThreadLocal.set(null);
+        UserIdThreadLocal.clear();
     }
 
     public void returnErrorResponse(HttpServletResponse response, ResultObject resultObject){
