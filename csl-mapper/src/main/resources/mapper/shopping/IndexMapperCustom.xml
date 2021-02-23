@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csl.mapper.shopping.IndexMapperCustom">
+    <resultMap id="Carousel" type="com.csl.pojo.shopping.Carousel">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR"/>
+        <result column="background_color" property="backgroundColor" jdbcType="VARCHAR"/>
+        <result column="item_id" property="itemId" jdbcType="VARCHAR"/>
+        <result column="cat_id" property="catId" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="is_show" property="isShow" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="queryCarousels" parameterType="Integer" resultMap="Carousel">
+        SELECT
+            *
+        FROM
+          carousel
+        WHERE
+          is_show = #{is_show}
+        ORDER BY
+          sort
+        DESC
+    </select>
+
+    <select id="queryRootCategory" resultType="com.csl.pojo.shopping.Category">
+        SELECT
+            id,
+            name,
+            type,
+            father_id as fatherId,
+            logo,
+            slogan,
+            cat_image as catImage,
+            bg_color as bgColor
+        FROM
+          category
+        WHERE
+          type = 1
+    </select>
+
+
+    <resultMap id="subCategory" type="com.csl.pojo.vo.shopping.CategoryVO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="type" property="type"/>
+        <result column="fatherId" property="fatherId"/>
+
+        <!--
+          collection 标签：用于定义关联的list集合类型的封装规则
+          property：对应三级分类的list属性名
+          ofType：集合的类型，三级分类的vo
+        -->
+        <collection property="subCatList" ofType="com.csl.pojo.vo.shopping.SubCategoryVO">
+            <id column="subId" property="subId"/>
+            <result column="subName" property="subName"/>
+            <result column="subType" property="subType"/>
+            <result column="subFatherId" property="subFatherId"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="querySubCatogory" parameterType="Integer" resultMap="subCategory">
+        SELECT
+            f.id as id,
+            f.`name` as `name`,
+            f.type as type,
+            f.father_id as fatherId,
+            c.id as subId,
+            c.`name` as subName,
+            c.type as subType,
+            c.father_id as subFatherId
+        FROM
+            category f
+        LEFT JOIN
+            category c
+        ON
+            f.id = c.father_id
+        WHERE
+            f.father_id = #{rootCatId}
+    </select>
+
+
+</mapper>
