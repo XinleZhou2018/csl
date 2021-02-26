@@ -44,6 +44,9 @@ public class MatchCommentController {
         return ResultObject.success(null);
     }
 
+/*    @NotNull://CharSequence, Collection, Map 和 Array 对象不能是 null, 但可以是空集（size = 0）。
+    @NotEmpty://CharSequence, Collection, Map 和 Array 对象不能是 null 并且相关对象的 size 大于 0。
+    @NotBlank://String 不能是 null 且去除两端空白字符后的长度（trimmed length）大于 0。*/
     @PostMapping("/replyComment")
     public ResultObject replyComment(
             @RequestParam(required = false) @NotNull(message = "commentId不能为空") Long commentId,

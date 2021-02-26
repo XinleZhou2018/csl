@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.csl.mapper.shopping.ItemMapperCustom">
+    <select id="queryItemById" parameterType="String" resultType="com.csl.pojo.shopping.Items">
+        SELECT
+            id,
+            item_name AS itemName,
+            cat_id AS catId,
+            root_cat_id AS rootCatId,
+            sell_counts AS sellCounts,
+            on_off_status AS onOffStatus,
+            content,
+            created_time AS createdTime,
+            updated_time AS updatedTime
+        FROM
+          items
+        WHERE
+          id = #{itemId}
+    </select>
+
+    <select id="queryItemImgList" parameterType="String" resultType="com.csl.pojo.shopping.ItemsImg">
+        SELECT
+            id,
+            item_id AS itemId,
+            url,
+            sort,
+            is_main AS isMain,
+            created_time AS createdTime,
+            updated_time AS updatedTime
+        FROM
+          items_img
+        WHERE
+          item_id = #{itemId}
+    </select>
+
+    <select id="queryItemSpecList" parameterType="String" resultType="com.csl.pojo.shopping.ItemsSpec">
+        SELECT
+            id,
+            item_id AS itemId,
+            name,
+            stock,
+            discounts,
+            price_discount AS priceDiscount,
+            price_normal AS priceNormal,
+            created_time AS createdTime,
+            updated_time AS updatedTime
+        FROM
+          items_spec
+        WHERE
+          item_id = #{itemId}
+    </select>
+
+    <select id="queryItemParamById" parameterType="String" resultType="com.csl.pojo.shopping.ItemsParam">
+        SELECT
+            id,
+            item_id AS itemId,
+            produc_place AS producPlace,
+            foot_period AS footPeriod,
+            brand,
+            factory_name AS factoryName,
+            factory_address AS factoryAddress,
+            packaging_method AS packagingMethod,
+            weight,
+            storage_method AS storageMethod,
+            eat_method AS eatMethod,
+            created_time AS createdTime,
+            updated_time AS updatedTime
+        FROM
+          items_param
+        WHERE
+          item_id = #{itemId}
+    </select>
+</mapper>
