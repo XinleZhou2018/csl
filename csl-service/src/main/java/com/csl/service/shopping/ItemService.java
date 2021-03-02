@@ -4,6 +4,9 @@ import com.csl.pojo.shopping.Items;
 import com.csl.pojo.shopping.ItemsImg;
 import com.csl.pojo.shopping.ItemsParam;
 import com.csl.pojo.shopping.ItemsSpec;
+import com.csl.pojo.vo.shopping.SearchItemsVO;
+import com.github.pagehelper.PageInfo;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -35,4 +38,13 @@ public interface ItemService {
      * @return
      */
     public ItemsParam queryItemParam(String itemId);
+
+    /**
+     * 根据关键字搜索商品
+     * @param keyword, sort
+     * @return
+     */
+    public PageInfo<SearchItemsVO> searchItems(String keyword, Integer sort, Integer page, Integer pageSize);
+
+    public PageInfo<SearchItemsVO> searchItemsByThirdCatId(Integer catId, Integer sort, Integer page, Integer pageSize);
 }
