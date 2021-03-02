@@ -23,7 +23,7 @@ public class MatchCommentController {
     public ResultObject getCommentList(
             @RequestParam(required = false) @NotNull(message = "matchId不能为空") Long matchId,
             @RequestParam(required = false) @NotNull(message = "page不能为空") @Min(value = 1, message = "page大于1") Integer page,
-            @RequestParam(required = false) @NotNull(message = "pageSize不能为空") @Min(value = 1, message = "pageCount大于1") Integer pageSize) {
+            @RequestParam(required = false) @NotNull(message = "pageSize不能为空") @Min(value = 1, message = "pageSize大于1") Integer pageSize) {
         PageInfo pageInfo = matchCommentService.queryMatchComments(matchId, page, pageSize);
         return ResultObject.success(pageInfo);
     }
@@ -31,7 +31,7 @@ public class MatchCommentController {
     @GetMapping("/commentReplyList")
     public ResultObject getCommentReplyList(@RequestParam(required = false) @NotNull(message = "commentId不能为空") Long commentId,
                                             @RequestParam(required = false) @NotNull(message = "page不能为空") @Min(value = 1, message = "page大于1") Integer page,
-                                            @RequestParam(required = false) @NotNull(message = "pageSize不能为空") @Min(value = 1, message = "pageCount大于1") Integer pageSize){
+                                            @RequestParam(required = false) @NotNull(message = "pageSize不能为空") @Min(value = 1, message = "pageSize大于1") Integer pageSize){
         PageInfo pageInfo = matchCommentService.queryMatchCommentReplies(commentId, page, pageSize);
         return ResultObject.success(pageInfo);
     }
