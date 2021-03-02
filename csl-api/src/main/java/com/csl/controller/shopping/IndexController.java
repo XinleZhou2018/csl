@@ -19,8 +19,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
-@RequestMapping("/index")
 @Validated
+@RequestMapping("/index")
 public class IndexController {
 
     @Autowired
