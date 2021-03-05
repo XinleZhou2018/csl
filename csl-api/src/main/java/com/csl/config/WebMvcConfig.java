@@ -9,8 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    //实现静态资源的映射 TODO
-
     //定义一个拦截器
     @Bean
     public LoginCheckInterceptor loginCheckInterceptor(){
