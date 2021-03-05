@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -135,5 +136,15 @@ public class GlobalExceptionAdvice {
 
     //https://www.cnblogs.com/nightOfStreet/p/12875224.html 这个博文中基本涵盖了所有异常类型
 
+    // 图片大小超出 yml配置文件中配置的大小，捕获异常
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    @ResponseBody
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST) //400
+    public ResultObject handleMaxUploadSizeException(HttpServletRequest request, MaxUploadSizeExceededException e){
+        String requestUrl = request.getRequestURI();
+        String method = request.getMethod();
+//        String errorMessage = e.getBindingResult().getFieldError().getDefaultMessage();
 
+        return new ResultObject(10005, exceptionConfiguration.getMessage(10005), method + " " + requestUrl, null);
+    }
 }

@@ -55,6 +55,7 @@ public class JsonUtils {
             List<T> list = MAPPER.readValue(jsonData, javaType);
             return list;
         } catch (Exception e) {
+            // 这里需要抛出运行时异常
 //            throw new HttpException(1000,200);
             e.printStackTrace();
         }
