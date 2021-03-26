@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@SpringBootApplication(scanBasePackages = {"com.csl"})
+@SpringBootApplication(scanBasePackages = {"com.csl", "org.n3r.idworker"})
 //// 扫描 mybatis 通用 mapper 所在的包
 @MapperScan(basePackages = "com.csl.mapper", annotationClass = Repository.class)
 public class Application {

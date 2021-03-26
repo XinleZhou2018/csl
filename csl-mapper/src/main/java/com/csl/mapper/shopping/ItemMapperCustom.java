@@ -21,4 +21,7 @@ public interface ItemMapperCustom {
     public List<SearchItemsVO> searchItems(@Param("paramsMap") Map<String, Object> map);
     public List<SearchItemsVO> searchItemsByThirdCatId(@Param("paramsMap") Map<String, Object> map);
 
+    //减少商品（规格）库存
+    public int decreaseItemSpecStock(@Param("specId") String specId,
+                                     @Param("pendingCounts") int pendingCounts);
 }

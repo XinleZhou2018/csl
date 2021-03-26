@@ -73,62 +73,62 @@
 
     <select id="searchItems" parameterType="Map" resultType="com.csl.pojo.vo.shopping.SearchItemsVO">
         SELECT
-            i.id as itemId,
-            i.item_name as itemName,
-            i.sell_counts as sellCounts,
-            ii.url as imgUrl,/**/
-            tempSpec.price_discount as price
+        i.id as itemId,
+        i.item_name as itemName,
+        i.sell_counts as sellCounts,
+        ii.url as imgUrl,/**/
+        tempSpec.price_discount as price
         FROM
-            items i
+        items i
         LEFT JOIN
-            items_img ii
+        items_img ii
         ON
-            i.id = ii.item_id
+        i.id = ii.item_id
         LEFT JOIN
-            (SELECT item_id,MIN(price_discount) as price_discount from items_spec GROUP BY item_id) tempSpec
+        (SELECT item_id,MIN(price_discount) as price_discount from items_spec GROUP BY item_id) tempSpec
         ON
-            i.id = tempSpec.item_id
+        i.id = tempSpec.item_id
         WHERE
-            ii.is_main = 1
+        ii.is_main = 1
         <if test=" paramsMap.keyword != null and paramsMap.keyword != '' ">
             AND i.item_name like '%${paramsMap.keyword}%'
         </if>
         ORDER BY
-            <choose>
-                <when test=" paramsMap.sort == 1 ">
-                    i.sell_counts desc
-                </when>
-<!--                <when test=" paramsMap.sort == &quot;p&quot; ">-->
-                <when test=" paramsMap.sort == 2 ">
-                    tempSpec.price_discount asc
-                </when>
-                <otherwise>
-                    i.item_name asc
-                </otherwise>
+        <choose>
+            <when test=" paramsMap.sort == 1 ">
+                i.sell_counts desc
+            </when>
+            <!--                <when test=" paramsMap.sort == &quot;p&quot; ">-->
+            <when test=" paramsMap.sort == 2 ">
+                tempSpec.price_discount asc
+            </when>
+            <otherwise>
+                i.item_name asc
+            </otherwise>
         </choose>
     </select>
 
     <select id="searchItemsByThirdCatId" parameterType="Map" resultType="com.csl.pojo.vo.shopping.SearchItemsVO">
         SELECT
-            i.id as itemId,
-            i.item_name as itemName,
-            i.sell_counts as sellCounts,
-            ii.url as imgUrl,
-            tempSpec.price_discount as price
+        i.id as itemId,
+        i.item_name as itemName,
+        i.sell_counts as sellCounts,
+        ii.url as imgUrl,
+        tempSpec.price_discount as price
         FROM
-            items i
+        items i
         LEFT JOIN
-            items_img ii
+        items_img ii
         ON
-            i.id = ii.item_id
+        i.id = ii.item_id
         LEFT JOIN
-            (SELECT item_id,MIN(price_discount) as price_discount from items_spec GROUP BY item_id) tempSpec
+        (SELECT item_id,MIN(price_discount) as price_discount from items_spec GROUP BY item_id) tempSpec
         ON
-            i.id = tempSpec.item_id
+        i.id = tempSpec.item_id
         WHERE
-            ii.is_main = 1
+        ii.is_main = 1
         AND
-            i.cat_id = #{paramsMap.catId}
+        i.cat_id = #{paramsMap.catId}
         ORDER BY
         <choose>
             <when test=" paramsMap.sort == 1 ">
@@ -142,4 +142,15 @@
             </otherwise>
         </choose>
     </select>
+
+    <update id="decreaseItemSpecStock">
+        UPDATE
+            items_spec
+        SET
+            stock = stock - #{pendingCounts}
+        WHERE
+            id = #{specId}
+        AND
+            stock >= #{pendingCounts}
+    </update>
 </mapper>
