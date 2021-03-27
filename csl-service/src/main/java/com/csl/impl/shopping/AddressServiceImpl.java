@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AddressServiceImpl implements AddressService {
     @Autowired
-    AddressMapperCustom addressMapperCustom;
+    private AddressMapperCustom addressMapperCustom;
 
     @Override
     public List<UserAddress> queryUserAddressList() {

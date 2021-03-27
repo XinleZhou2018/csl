@@ -28,7 +28,7 @@ import java.io.InputStream;
 public class UserController {
 
     @Autowired
-    FileUploadConfig fileUploadConfig;
+    private FileUploadConfig fileUploadConfig;
 
     @PostMapping("/login")
     public ResultObject login(){

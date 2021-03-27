@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class IndexServiceImpl implements IndexService {
     @Autowired
-    IndexMapperCustom indexMapperCustom;
+    private IndexMapperCustom indexMapperCustom;
 
     @Override
     public List<Carousel> queryCarousels(Integer is_show) {

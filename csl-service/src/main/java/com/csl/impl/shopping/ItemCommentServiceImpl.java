@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class ItemCommentServiceImpl implements ItemCommentService {
     @Autowired
-    ItemCommentMapperCustom itemCommentMapperCustom;
+    private ItemCommentMapperCustom itemCommentMapperCustom;
 
     @Override
     public ItemCommentLevelVO queryItemCommentLevel(String itemId) {

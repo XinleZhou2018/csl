@@ -24,7 +24,7 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    IndexService indexService;
+    private IndexService indexService;
 
     //首页轮播图，不需要分页，根据数据库is_show字段显示轮播图，sort字段排序。
     @GetMapping("/carousel")

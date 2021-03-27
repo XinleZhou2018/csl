@@ -27,7 +27,7 @@ import java.util.List;
 @RequestMapping("/item")
 public class ItemController {
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
 
     @GetMapping("/detail")
     public ResultObject getItemDetail(@RequestParam(required = false) @NotBlank(message = "itemId不能为空") String itemId){

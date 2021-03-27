@@ -18,7 +18,7 @@ import java.util.Map;
 public class MacthCommentServiceImpl implements MatchCommentService {
 
     @Autowired
-    MatchCommentMapperCustom matchCommentMapperCustom;
+    private MatchCommentMapperCustom matchCommentMapperCustom;
 
     @Override
     public PageInfo<MatchCommentVO> queryMatchComments(Long matchId, Integer page, Integer pageSize) {

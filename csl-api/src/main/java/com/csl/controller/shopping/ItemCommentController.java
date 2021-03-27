@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/itemComments")
 public class ItemCommentController {
     @Autowired
-    ItemCommentService itemCommentService;
+    private ItemCommentService itemCommentService;
 
     @GetMapping("/commentLevel")
     public ResultObject getItemCommentLevel(

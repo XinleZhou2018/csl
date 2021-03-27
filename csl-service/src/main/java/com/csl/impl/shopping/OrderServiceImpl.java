@@ -31,6 +31,7 @@ public class OrderServiceImpl implements OrderService {
     public void decreaseItemCounts(String specId, Integer buyCounts) {
 
         //分布式锁
+        // 用商品规格id作为redis的key，很合适，当多线程购买同一个规格的商品才会抢锁，购买其他规格的商品则是另外一把锁
         RLock rLock = redissonClient.getLock("SPECID"+specId);
         log.info("进入了方法");
 

@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class MatchCommentController {
 
     @Autowired
-    MatchCommentService matchCommentService;
+    private MatchCommentService matchCommentService;
 
     @GetMapping("/commentList")
     public ResultObject getCommentList(
