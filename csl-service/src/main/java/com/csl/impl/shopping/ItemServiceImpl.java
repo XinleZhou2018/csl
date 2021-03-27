@@ -20,7 +20,8 @@ import java.util.Map;
 public class ItemServiceImpl implements ItemService {
 
     @Autowired
-    ItemMapperCustom itemMapperCustom;
+    private ItemMapperCustom itemMapperCustom;
+
 
     @Override
     public Items queryItemById(String itemId) {

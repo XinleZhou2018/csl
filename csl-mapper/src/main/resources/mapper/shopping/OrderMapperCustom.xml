@@ -57,7 +57,7 @@
 <!--    </select>-->
 
 
-    <resultMap id="myOrdersVO" type="com.imooc.pojo.vo.MyOrdersVO">
+    <resultMap id="myOrdersVO" type="com.csl.pojo.vo.shopping.MyOrdersVO">
         <id column="orderId" property="orderId"/>
         <result column="createdTime" property="createdTime"/>
         <result column="payMethod" property="payMethod"/>
@@ -69,7 +69,7 @@
         <collection property="subOrderItemList"
                     select="getSubItems"
                     column="orderId"
-                    ofType="com.imooc.pojo.vo.MySubOrderItemVO">
+                    ofType="com.csl.pojo.vo.shopping.MySubOrderItemVO">
             <result column="itemId" property="itemId"/>
             <result column="itemName" property="itemName"/>
             <result column="itemImg" property="itemImg"/>
@@ -106,7 +106,7 @@
     </select>
 
 
-    <select id="getSubItems" parameterType="String" resultType="com.imooc.pojo.vo.MySubOrderItemVO">
+    <select id="getSubItems" parameterType="String" resultType="com.csl.pojo.vo.shopping.MySubOrderItemVO">
       select
         oi.item_id as itemId,
         oi.item_name as itemName,
