@@ -41,13 +41,14 @@ public class OrderServiceImpl implements OrderService {
              */
             rLock.lock(30, TimeUnit.SECONDS);
             log.info("进入了锁");
-            Thread.sleep(10000);
+            //模拟耗时操作
+//            Thread.sleep(10000);
 
-//            int result = itemMapperCustom.decreaseItemSpecStock(specId, buyCounts);
-//            if (result != 1) {
-//                //购买失败，库存不足
-//                throw new HttpException(10010, 200);
-//            }
+            int result = itemMapperCustom.decreaseItemSpecStock(specId, buyCounts);
+            if (result != 1) {
+                //购买失败，库存不足
+                throw new HttpException(10010, 200);
+            }
 
 
         }catch (Exception e){
