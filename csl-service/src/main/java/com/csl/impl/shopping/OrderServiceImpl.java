@@ -18,7 +18,7 @@ import static jodd.util.ThreadUtil.sleep;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    private static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
     private ItemMapperCustom itemMapperCustom;
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
         //分布式锁
         // 用商品规格id作为redis的key，很合适，当多线程购买同一个规格的商品才会抢锁，购买其他规格的商品则是另外一把锁
         RLock rLock = redissonClient.getLock("SPECID"+specId);
-        log.info("进入了方法");
+        logger.info("进入了方法");
 
         try {
             /**
@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
              *  2、获取到了锁，进行后续的业务操作
              */
             rLock.lock(30, TimeUnit.SECONDS);
-            log.info("进入了锁");
+            logger.info("进入了锁");
             //模拟耗时操作
 //            Thread.sleep(10000);
 
@@ -59,11 +59,10 @@ public class OrderServiceImpl implements OrderService {
              *  不管业务是否操作正确，随后都要释放掉分布式锁
              *   如果不释放，过了超时时间也会自动释放
              */
-            log.info("释放了锁");
+            logger.info("释放了锁");
             rLock.unlock();
         }
 
-        log.info("方法执行完成");
-
+        logger.info("方法执行完成");
     }
 }
