@@ -27,6 +27,7 @@ public class MatchController {
 
     @RequestMapping("/hello")
     public String hello(){
+        //test
         throw new HttpException(10001, 400);
 //        return "";
     }
